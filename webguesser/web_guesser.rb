@@ -5,39 +5,30 @@ NUM = rand(100)+1
 
 def check_guess(guessing)
   guessed = guessing.to_i
-  message = ""
   if guessed <= 0
     message = ""
+    color = "lightblue"
   elsif guessed - 5 > NUM
     message = "Way too high!"
+    color = "red"
   elsif guessed > NUM
     message = "Too high!"
+    color = "pink"
   elsif guessed + 5 < NUM
     message = "Way too low!"
+    color = "red"
   elsif guessed < NUM
     message = "Too low!"
+    color = "pink"
   else
     message = "You got it right!"
+    color = "green"
   end
-  return message
-end
-
-def check_color(msg)
-  if msg == ""
-    colour = "lightblue"
-  elsif msg == "Way too high!" || msg == "Way too low!"
-    colour = "red"
-  elsif msg == "Too high!" || msg == "Too low!"
-    colour = "pink"
-  else
-    colour = "lightgreen"
-  end
-  return colour
+  return message, color
 end
 
 get "/" do
   guess = params["guess"]
-  message = check_guess(guess)
-  coloring = check_color(message)  
+  message, coloring = check_guess(guess)
   erb :index, :locals => { :number => NUM, :message => message, :guessed => guess.to_i, :color => coloring }
 end

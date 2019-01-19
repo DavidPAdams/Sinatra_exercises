@@ -1,7 +1,3 @@
-
-require 'sinatra'
-require 'sinatra/reloader' if development?
-
 def caesar_cipher (raw_string, heat)
 
   rare_array = raw_string.codepoints

@@ -1,6 +1,3 @@
-require "sinatra"
-require "sinatra/reloader"
-
 NUM = rand(100)+1
 
 def check_guess(guessing)

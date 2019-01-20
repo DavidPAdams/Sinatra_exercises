@@ -7,7 +7,7 @@ class Hangman
   end
 
   def set_word
-    file_name = "words.txt"
+    file_name = "words.txt" #the words.txt file is in the sinatra/public folder
     @word = get_word(file_name).split("")
     hidden = Array.new(@word.length, "-")
   end

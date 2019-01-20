@@ -1,11 +1,11 @@
 require 'sinatra'
 require 'sinatra/reloader' if development?
-require_relative 'caesar_cipher/caesar_cipher'
-require_relative 'number_guess/number_guesser'
-require_relative 'word_guess/word_guess'
+require_relative 'caesar_cipher/application'
+require_relative 'number_guess/application'
+require_relative 'word_guess/application'
 
 enable :sessions
 
-get '/' dor
+get '/' do
   erb :index
 end

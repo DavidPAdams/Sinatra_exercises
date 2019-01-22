@@ -21,7 +21,7 @@ def caesar_cipher (raw_string, heat)
   @well_done = med_array.pack("C*")
 end
 
-get '/' do
+get '/caesar_cipher' do
   if params['action'] == 'Reset'
     params["raw_string"], params["heat"]  = nil
   end

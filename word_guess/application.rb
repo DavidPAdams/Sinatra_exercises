@@ -1,8 +1,6 @@
 class Hangman
 
   def initialize
-    puts "\nWelcome to Hangman!!\n\n"
-    instructions
     start
   end
 
@@ -42,11 +40,6 @@ class Hangman
       puts "This is not the game you are looking for..."
       go_away
     end
-  end
-
-  def instructions
-    puts "In this game you will need to guess the letters in the word randomly selected just for you!"
-    puts "You will be allowed only seven (7) incorrect guesses, so put your thinking cap on..."
   end
 
   def get_choice

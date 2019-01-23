@@ -33,5 +33,5 @@ get '/caesar_cipher' do
   else
     @well_done = ""
   end
-  erb :index, :locals => {:raw_string => raw_string, :coded => @well_done, :heat => heat}
+  erb :'caesar_cipher/index', locals: { raw_string: raw_string, coded: @well_done, heat: heat}, layout: :'caesar_cipher/layout' 
 end

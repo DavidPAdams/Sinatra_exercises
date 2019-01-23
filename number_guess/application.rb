@@ -27,5 +27,5 @@ end
 get "/number_guess" do
   guess = params["guess"]
   message, coloring = check_guess(guess)
-  erb :index, :locals => { :number => NUM, :message => message, :guessed => guess.to_i, :color => coloring }
+  erb :'number_guess/index', locals: { number: NUM, message: message, guessed: guess.to_i, color: coloring }
 end

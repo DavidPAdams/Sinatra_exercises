@@ -1,50 +1,23 @@
 class Hangman
 
-  def initialize
-    start
-  end
-
   def set_word
-    file_name = "words.txt" #the words.txt file is in the sinatra/public folder
-    @word = get_word(file_name).split("")
+    word_file = "words.txt" #the words.txt file is in the sinatra/public folder
+    @word = get_word(word_file).split("")
     hidden = Array.new(@word.length, "-")
   end
 
-  def get_word(file_name)
+  def get_word(werds_file)
     werd = ""
     until werd.length > 4 && werd.length < 13
-      werd = File.readlines(file_name).sample.chomp.downcase
+      werd = File.readlines(werds_file).sample.chomp.downcase
     end
     werd
   end
 
   def start
-    choice = get_choice
     @bad_letters = []   
-    case choice
-    when 1
-      hidden = set_word
-      play(hidden)
-    when 2
-      if File.exists?("saved_game.yaml")
-        hidden = get_game
-        play(hidden)
-      else
-        hidden = set_word
-        play(hidden)
-      end
-    when 3
-      bye
-    else
-      puts "\nWhatza matta you, youz ain't makin sense."
-      puts "This is not the game you are looking for..."
-      go_away
-    end
-  end
-
-  def get_choice
-    puts "\nPlease choose:\n\t1 - Play game\n\t2 - Load saved game\n\t3 - Quit"
-    result = gets.chomp.to_i
+    hidden = set_word
+    play(hidden)
   end
 
   def play(hidden)
@@ -57,11 +30,8 @@ class Hangman
     end
     if win
       congratulations
-      start
-    end
-    if @bad_letters.length == 7
+    elsif @bad_letters.length == 7
       too_bad
-      start
     end
   end
 
@@ -80,33 +50,10 @@ class Hangman
     #asks player for letter guessed
     entry = ""
     until ("a".."z").include? entry
-      print "\nEnter your letter, or type 'save' to save this game: " 
+      print "\nEnter your letter: " 
       entry = gets.chomp.downcase
-      if entry == "save"
-        game_saver(hidden)
-      end
     end
     return entry
-  end
-
-  def game_saver(hidden)
-    puts "\n\nSAVING GAME"
-    snapshot = [hidden, @word, @bad_letters]
-    saving = File.new("saved_game.yaml", "w")
-    File.open(saving, "w") do |game|
-      game.write snapshot.to_yaml
-    end
-    sleep(1)
-    bye
-  end
-
-  def get_game
-    past_game = YAML.load(File.open("saved_game.yaml"))
-    hidden = past_game[0]
-    @word = past_game[1]
-    @bad_letters = past_game[2]
-    puts "\n\n---> Saved game loaded.\n\n"
-    return hidden
   end
 
   def check_guess(guess, hidden)
@@ -116,13 +63,11 @@ class Hangman
     if @word.include?(guess)
       puts "\nYes, '#{guess}' is in the word, well done!"
       update_hidden(guess, hidden)
-      sleep(1.5)
   #if not included in (@word) then:
     #updates (@bad_letters)
     else
       puts "\nOh no, that'll cost you, '#{guess}' is not in the word."
       update_bad_letters(guess)
-      sleep(1.5)
     end
   end
 
@@ -150,7 +95,6 @@ class Hangman
     else
       win = false
     end
-    return win
   end
 
   def congratulations
@@ -158,7 +102,8 @@ class Hangman
   #remaining (wrong) guesses to spare
     puts "\n\n"
     puts "! " * 40
-    puts "\nCongratulations, you correctly guessed the word '#{@word.join}'!\nAnd with #{7 - @bad_letters.length} guesses to spare!\n"
+    puts "\nCongratulations, you correctly guessed the word '#{@word.join}'!\n
+    And with #{7 - @bad_letters.length} guess(es) to spare!\n"
   end
 
   def too_bad
@@ -168,14 +113,6 @@ class Hangman
     puts "\nToo bad, you got all hung up. The word you didn't guess is #{@word.join}.\n"
   end
 
-  def bye
-    puts "\n\nGAME OVER!\n\nThat was so much fun! TTFN!"
-    exit
-  end
-
-  def go_away
-    puts "\nThese are not the droids we're looking for;\nMove along, move along..."
-  end
 
 end
 

@@ -1,22 +1,7 @@
-class Hangman
-
-  def set_word
-    word_file = "words.txt" #the words.txt file is in the sinatra/public folder
-    @word = get_word(word_file).split("")
-    hidden = Array.new(@word.length, "-")
-  end
-
-  def get_word(werds_file)
-    werd = ""
-    until werd.length > 4 && werd.length < 13
-      werd = File.readlines(werds_file).sample.chomp.downcase
-    end
-    werd
-  end
+class Guessing
 
   def start
     @bad_letters = []   
-    hidden = set_word
     play(hidden)
   end
 
@@ -115,5 +100,3 @@ class Hangman
 
 
 end
-
-Hangman.new

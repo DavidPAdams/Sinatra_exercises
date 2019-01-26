@@ -2,7 +2,15 @@
 <h4>Okay yes, most people call this Hangman, but we'll do it without any graphics</h4>
 <br>
 <h3>Instructions:</h3>
-<p>In this game you will need to guess the letters in the word randomly selected just for you!</p>
-<p>You will be allowed only seven (7) incorrect guesses</p>
+<p>In this guessing game you will need to find the letters in a word randomly selected just for you!</p>
+<p>(That's letters only, no numbers, no special characters, and nothing wierd from some foreign language)</p>
+<p>You will be allowed only seven (7) incorrect guesses, choose wisely.</p>
 <br><br>
+<h2>Guess this <%= @word.length %>-letter word:</h2>
+<p><strong><%= @hidden.join(" ") %></strong></p>
+
+<% if @message %>
+  <p><%= @message %></p>
+<% end %>
+
 

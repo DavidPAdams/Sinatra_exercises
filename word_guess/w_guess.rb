@@ -1,13 +1,17 @@
 class Guessing
 
-  def start
+  attr_accessor :word, :hidden, :bad_letters, :message, :win
+
+  def initialize(word)
+    @word = word
+    @hidden = Array.new(@word.length, "-")
     @bad_letters = []   
-    play(hidden)
+    @message = ""
+    @win = false
   end
 
-  def play(hidden)
-    win = false
-    until @bad_letters.length == 7 || win == true
+  def play
+    until @bad_letters.length == 7 || @win == true
       display(hidden)
       guess = get_letter(hidden)
       check_guess(guess, hidden)

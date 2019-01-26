@@ -1,14 +1,14 @@
 require_relative "w_guess"
 
-@word = ""
-until @word.length.between?(5,12)
-  @word = File.readlines("words.txt").sample.chomp.downcase
+werd = ""
+until werd.length.between?(5,12)
+  werd = File.readlines("words.txt").sample.chomp.downcase
 end
-@hidden = Array.new(@word.length, "-")
-
-round = Guessing.new(@word, @hidden)
+round = Guessing.new(werd)
 
 get "/word_guess" do
 
-  erb :'word_guess/index'
+  round.play
+  erb :"word_guess/index", layout: :"word_guess/layout"
+
 end

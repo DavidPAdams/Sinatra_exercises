@@ -1,10 +1,11 @@
 class Guessing
 
-  attr_accessor :word, :hidden, :bad_letters, :message, :win
+  attr_accessor :word, :hidden, :entry, :bad_letters, :message, :win
 
   def initialize(word)
     @word = word
     @hidden = Array.new(@word.length, "-")
+    @entry = ""
     @bad_letters = []   
     @message = ""
     @win = false
@@ -24,18 +25,7 @@ class Guessing
     end
   end
 
-  def display(hidden)
-    puts "\n\n" + "+" * 75 
-#puts "#{@word.join}"
-    #shows the hidden word marks/letters (hidden)
-    puts "\n\tGuess the #{@word.length}-letter word: #{hidden.join}" 
-    #shows the number of guesses left (wrong)
-    puts "\nNumber of guesses remaining: #{7 - @bad_letters.length}" 
-    #shows the bad letters already guessed (@bad_letters)
-    puts "Letters guessed but not in the word: #{@bad_letters.join(' ')}" 
-  end
-
-  def get_letter(hidden)
+  def get_letter
     #asks player for letter guessed
     entry = ""
     until ("a".."z").include? entry

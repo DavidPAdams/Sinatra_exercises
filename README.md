@@ -5,7 +5,7 @@ Here is a set of mini-apps built with [Sinatra](http://sinatrarb.com/). Some are
 Styling is very minimal (or not at all), since that is not the focus of the project. There are three applications grouped into the overall Sinatra Projects app, this was done to deploy them as a set on Heroku. The grouped applications are:
 
 ## Caesar Cipher
-A simple alphabet shift cipher attributed to Julius Caesar, [(Caesar Cipher basic info)](https://en.wikipedia.org/wiki/Caesar_cipher). A CLI Ruby programming assignment from the Ruby course of The Odin Project.
+A simple alphabet shift cipher attributed to Julius Caesar, ([Caesar Cipher basic info](https://en.wikipedia.org/wiki/Caesar_cipher)). A CLI Ruby programming assignment from the Ruby course of The Odin Project.
 
 ## Number Guess
 This is a version of the [WebGuesser tutorial](http://tutorials.jumpstartlab.com/projects/web_guesser.html) from Jumpstart Labs, completed as part of the overall Sinatra module of The Odin Project.

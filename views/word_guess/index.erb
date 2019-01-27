@@ -20,7 +20,7 @@
   <% end %>
 <% end %>
 
-<% while @bad_letters.length < 7 || !@win %>
+<% if @bad_letters.length < 7 || !@win %>
   <form method="post" action="/word_guess">
     <p>Enter a letter: 
       <input type="text" name="entry" autofocus="true" autocomplete="false" size="3" minlength="1" maxlength="1">
@@ -31,6 +31,6 @@
 
 <% if @win || @bad_letters == 7 %>
   <form method="post" action="/word_guess/new">
-    <input type="submit" value="Another word">
+    <input type="submit" value="Another word?">
   </form>
 <% end %>

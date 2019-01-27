@@ -3,9 +3,10 @@
 <br>
 <h3>Instructions:</h3>
 <p>In this guessing game you will need to find the letters in a word randomly selected just for you!</p>
-<p>(That's letters only, no numbers, no special characters, and nothing wierd from some foreign language)</p>
+<p>(That's letters only, no numbers, no special characters, and nothing unique to a foreign language)</p>
 <p>You will be allowed only seven (7) incorrect guesses, choose wisely.</p>
 <br><br>
+
 <h2>Guess this <%= @word.length %>-letter word:</h2>
 <p><strong><%= @hidden.join(" ") %></strong></p>
 
@@ -13,4 +14,23 @@
   <p><%= @message %></p>
 <% end %>
 
+<% if @bad_letters.length < 7 || !@win %>
+  <% if @bad_letters.length > 0  %>
+    <p>Letters guessed but not in the word: <strong><%= @bad_letters.join(' ') %></strong></p>
+  <% end %>
+<% end %>
 
+<% while @bad_letters.length < 7 || !@win %>
+  <form method="post" action="/word_guess">
+    <p>Enter a letter: 
+      <input type="text" name="entry" autofocus="true" autocomplete="false" size="3" minlength="1" maxlength="1">
+      <input type="submit" value="Guess">
+    </p>
+  </form>
+<% end %>
+
+<% if @win || @bad_letters == 7 %>
+  <form method="post" action="/word_guess/new">
+    <input type="submit" value="Another word">
+  </form>
+<% end %>

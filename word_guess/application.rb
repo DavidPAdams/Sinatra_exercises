@@ -1,14 +1,17 @@
 require_relative "w_guess"
 
-werd = ""
-until werd.length.between?(5,12)
-  werd = File.readlines("words.txt").sample.chomp.downcase
-end
-round = Guessing.new(werd)
+word_list = File.readlines("./word_guess/words.txt")
+round = Guessing.new(word_list)
 
 get "/word_guess" do
-  @message = ""
-  if @win || @bad_letters == 7
+  @word = round.word
+  @hidden = round.hidden
+  @bad_letters = round.bad_letters
+  @message = round.message
+  @win = round.win
+  @guess = session[:guess]
+  @win = round.check_win
+  if @win || @bad_letters.length == 7
     if @win
       @message = "Congratulations, You found the word!"
     else
@@ -19,21 +22,16 @@ get "/word_guess" do
 end
 
 post "/word_guess" do
-  @guess = params["entry"].chomp.downcase
-  if round.validate_guess
-    round.check_guess
-    round.check_win
+  guess = params["entry"].chomp.downcase
+  if round.validate_guess(guess)
+    round.check_guess(guess)
   else
-    @message = "Guess a letter, no numbers or special characters!"  
+    round.message = "Guess a letter, no numbers or special characters!"  
   end
   redirect "/word_guess"
 end
 
 post "/word_guess/new" do
-  mot = ""
-  until mot.length.between?(5,12)
-    mot = File.readlines("words.txt").sample.chomp.downcase
-  end
-  round = Guessing.new(mot)
+  round = Guessing.new(word_list)
   redirect "/word_guess"
 end

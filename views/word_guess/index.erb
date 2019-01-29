@@ -1,26 +1,25 @@
 <h1>Welcome to Word-Guess!</h1>
 <h4>Okay yes, most people call this Hangman, but we'll do it without any graphics</h4>
-<br>
 <h3>Instructions:</h3>
 <p>In this guessing game you will need to find the letters in a word randomly selected just for you!</p>
 <p>(That's letters only, no numbers, no special characters, and nothing unique to a foreign language)</p>
-<p>You will be allowed only seven (7) incorrect guesses, choose wisely.</p>
-<br><br>
-
+<p>You will be allowed only seven (7) incorrect guesses so choose wisely.</p>
+<% if !@word %>
+  <form method="post" action="/word_guess/new">
+    <input type="submit" value="Select Word">
+  </form>
+<% end %>
 <h2>Guess this <%= @word.length %>-letter word:</h2>
 <p><strong><%= @hidden.join(" ") %></strong></p>
-
 <% if @message %>
   <p><%= @message %></p>
 <% end %>
-
 <% if @bad_letters.length < 7 || !@win %>
   <% if @bad_letters.length > 0  %>
     <p>Letters guessed but not in the word: <strong><%= @bad_letters.join(' ') %></strong></p>
   <% end %>
 <% end %>
-
-<% if @bad_letters.length < 7 || !@win %>
+<% if @bad_letters.length < 7 && !@win %>
   <form method="post" action="/word_guess">
     <p>Enter a letter: 
       <input type="text" name="entry" autofocus="true" autocomplete="false" size="3" minlength="1" maxlength="1">
@@ -28,9 +27,8 @@
     </p>
   </form>
 <% end %>
-
-<% if @win || @bad_letters == 7 %>
+<% if @win || @bad_letters.length == 7 %>
   <form method="post" action="/word_guess/new">
-    <input type="submit" value="Another word?">
+    <input type="submit" value="Again">
   </form>
 <% end %>

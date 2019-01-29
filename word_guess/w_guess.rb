@@ -39,7 +39,7 @@ class Guessing
   end
 
   def update_hidden(guess)
-  #cycles through (@word) with index and puts (@guess) in 
+  #cycles through (@word) with index and puts (guess) in 
   #the indexed position of (@hidden)
     @word.each_with_index do |ltr, i|
       if ltr == guess

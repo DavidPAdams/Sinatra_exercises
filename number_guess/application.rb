@@ -8,3 +8,7 @@ get "/number_guess" do
   message, coloring = round.check_guess(guess)
   erb :'number_guess/index', locals: { number: numbr, message: message, guessed: guess.to_i, color: coloring }
 end
+
+post "/number_guess/new" do
+  redirect "/number_guess"
+end

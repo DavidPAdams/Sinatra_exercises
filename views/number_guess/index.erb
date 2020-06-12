@@ -22,7 +22,7 @@
     <% end %>
     <% if message == "You got it right!" %>
       <p>My SECRET NUMBER is <%= number %></p>
-      <form method="post" action="/number_guess/new">
+      <form method="post" action="/number_guess">
         <input type="submit" value="Again">
       </form>
     <% end %>

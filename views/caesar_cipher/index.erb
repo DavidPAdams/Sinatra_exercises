@@ -11,13 +11,13 @@
   <p><strong>Enter message to encrypt:</strong></p>
   <textarea class='unencoded' type='text' name='raw_string' autofocus><%= raw_string %></textarea><br></br>
   <strong>Shift factor:</strong>
-  <input id='shift' type='text' name='heat' value="<%= heat %>" pattern="[-+]*\d+" size="1"/>
+  <input id='shift' type='text' name='heat' placeholder="<%= heat %>" pattern="[-+]*\d+" size="1"/>
   <input class='bttn' type='submit' name='action' value='Encode'/>
   <input class='bttn' type='submit' name='action' value='Reset'/>
 </form>
 <div align="center">
   <% if coded.length > 0 %>
     <p id='banner'><strong>Your encrypted message is: </strong></p>
-    <textarea class='code'> <%= coded %> </textarea>
+    <textarea class='code'><%= coded %></textarea>
   <% end %>
 </div>
